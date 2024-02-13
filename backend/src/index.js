@@ -7,7 +7,7 @@ const app = fastify({ logger: true })
 app.register(cors)
 
 
-app.post(`/contact`, async (req, res) => {
+app.post(`/contact/new`, async (req, res) => {
   const result = await prisma.post.create({
     data: {
       first: "",
