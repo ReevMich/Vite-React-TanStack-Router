@@ -1,0 +1,20 @@
+{
+  "name": "rest-fastify",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "dev": "node src/index.js"
+  },
+  "dependencies": {
+    "@fastify/cors": "^9.0.1",
+    "@planetscale/database": "^1.16.0",
+    "@prisma/client": "5.9.1",
+    "fastify": "4.26.0"
+  },
+  "devDependencies": {
+    "prisma": "5.9.1"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  }
+}
