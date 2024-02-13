@@ -48,46 +48,20 @@ export const getContactsQueryOptions = (query?: string) =>
 
 
 export async function createEmptyContact() {
-  const contact = await db.contact.create({
-    data: {
-      first: "",
-      last: "",
-      avatar: "",
-      twitter: "",
-      notes: "",
-      favorite: "",
-    },
-  });
-  return contact;
+  return await axios.post('http://localhost:3000/contact/new')
+  .then(res => res.data)
 }
 
 export async function getContact(id: string) {
-  return db.contact.findUnique({
-    where: { id: Number(id) },
-  }); 
+  return await axios.get<Contact>(`http://localhost:3000/contact/${id}`)
 }
 
 export async function updateContact(updates: Partial<Contact>) {
-  const contact = await db.contact.findUnique({
-    where: { id: Number(updates.id) },
-  });
-  if (!contact) {
-    throw new Error(`No contact found for ${updates.id}`);
-  }
-  delete updates.id;
-  await db.contact.update({
-    where: { id: contact.id },
-    data: {
-      ...updates,
-    }
-  });
-  return contact;
+  return await axios.put(`http://localhost:3000/contact/${updates.id}`, updates);
 }
 
 export async function deleteContact(id: number) {
-  await db.contact.delete({
-    where: { id: Number(id) },
-  });
+  return await axios.delete(`http://localhost:3000/contact/${id}`);
 }
 
 export const contactsData = [
